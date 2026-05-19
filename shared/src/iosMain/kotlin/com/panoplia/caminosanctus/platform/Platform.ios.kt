@@ -2,12 +2,7 @@ package com.panoplia.caminosanctus.platform
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.CoroutineDispatcher
-import platform.Foundation.NSString
-import platform.Foundation.NSUUID
-import platform.Foundation.NSDate
-import platform.Foundation.stringByFoldingWithOptions
-import platform.Foundation.NSDiacriticInsensitiveSearch
-import platform.Foundation.NSCaseInsensitiveSearch
+import platform.Foundation.*
 
 actual val ioDispatcher: CoroutineDispatcher   = Dispatchers.Default
 actual val mainDispatcher: CoroutineDispatcher = Dispatchers.Main
@@ -18,7 +13,7 @@ actual fun String.normalizeForComparison(): String =
     ).trim()
 
 actual fun generateUuid(): String = NSUUID().UUIDString()
-actual fun currentTimeMs(): Long  = (NSDate().timeIntervalSince1970 * 1000).toLong()
+actual fun currentTimeMs(): Long  = kotlin.system.getTimeMillis()
 
 actual fun createVpnManager(): VpnManager = object : VpnManager {
     override suspend fun engageSinkhole(packageName: String) {}
