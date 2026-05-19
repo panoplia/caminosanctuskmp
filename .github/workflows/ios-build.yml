@@ -20,6 +20,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Install Pods
+        run: |
+          cd iosApp
+          pod install
+
       - name: Build KMP XCFramework
         run: ./gradlew :shared:assembleSharedXCFramework
 
