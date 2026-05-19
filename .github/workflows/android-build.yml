@@ -32,4 +32,4 @@ jobs:
       - name: Verify manifest permissions
         run: |
           grep -E "BIND_VPN_SERVICE|PACKAGE_USAGE_STATS|FOREGROUND_SERVICE" \
-            androidApp/build/intermediates/merged_manifests/debug/AndroidManifest.xml
+            androidApp/build/intermediates/merged_manifests/debug/processDebugManifest/AndroidManifest.xml
