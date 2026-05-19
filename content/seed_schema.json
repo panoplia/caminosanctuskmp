@@ -1,0 +1,26 @@
+{
+  "_instructions_for_kimi": {
+    "task": "Generate 300 theological content cards from the Panoplia source material. Output ONLY a JSON array. No preamble. No markdown. Valid JSON only.",
+    "theological_depth_tier": {
+      "1": "15-second soft intercept. 1-2 sentences. Broadly accessible.",
+      "2": "30-second engaged intercept. 2-4 sentences with reflection angle.",
+      "3": "Deep companion priming. Patristic sources, historical context."
+    },
+    "language": "Spanish — native, not translated. Never preachy.",
+    "distribution": { "tier_1": 120, "tier_2": 130, "tier_3": 50 }
+  },
+  "schema": {
+    "id": "UUID v4 string",
+    "category": "escritura | patristica | historia_eclesiastica | liturgia | oracion | virtud",
+    "title": "5-10 word hook",
+    "body": "reflection text in Spanish",
+    "source": "scripture reference or patristic citation or null",
+    "theological_depth_tier": "1, 2, or 3",
+    "liturgical_theme": "adviento | cuaresma | pascua | tiempo_ordinario | null",
+    "emotional_state": "ansiedad_digital | distraccion | vacio | busqueda | paz | null",
+    "display_count": 0,
+    "last_shown_at": null,
+    "user_rating": null,
+    "created_at": 1735689600000
+  }
+}

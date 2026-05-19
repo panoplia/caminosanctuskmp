@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(unzip -l camino-sanctus-main_legacycoderepo.zip)",
+      "Bash(gradle wrapper *)",
+      "Bash(where gradle *)",
+      "Bash(where java *)",
+      "Bash(java -version)",
+      "Bash(C:/Users/Gabriel/.gradle/wrapper/dists/gradle-8.11.1-bin/bpt9gzteqjrbo1mjrsomdt32c/gradle-8.11.1/bin/gradle wrapper *)",
+      "Bash(C:/Users/Gabriel/.gradle/wrapper/dists/gradle-8.11.1-bin/bpt9gzteqjrbo1mjrsomdt32c/gradle-8.11.1/bin/gradle.bat wrapper *)",
+      "Bash(xargs -I{} basename {})",
+      "Bash(./gradlew :shared:generateSqlDelightInterface --info)",
+      "Bash(./gradlew :shared:generateSqlDelightInterface)",
+      "Bash(./gradlew build *)"
+    ]
+  }
+}

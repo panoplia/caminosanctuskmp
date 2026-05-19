@@ -1,0 +1,35 @@
+CREATE TABLE umbral_state (
+    id                         INTEGER NOT NULL PRIMARY KEY DEFAULT 1,
+    current_phase              TEXT    NOT NULL DEFAULT 'IDLE',
+    active_target_app          TEXT,
+    phase_start_timestamp      INTEGER,
+    unlock_time_epoch          INTEGER,
+    emergency_bypass_available INTEGER NOT NULL DEFAULT 1,
+    updated_at                 INTEGER NOT NULL
+);
+
+initState:
+INSERT OR IGNORE INTO umbral_state (id, updated_at) VALUES (1, :timestamp);
+
+getState:
+SELECT * FROM umbral_state WHERE id = 1;
+
+updatePhase:
+UPDATE umbral_state
+SET current_phase = :phase,
+    active_target_app = :targetApp,
+    phase_start_timestamp = :phaseStartTimestamp,
+    unlock_time_epoch = :unlockTimeEpoch,
+    emergency_bypass_available = :emergencyBypassAvailable,
+    updated_at = :updatedAt
+WHERE id = 1;
+
+resetToIdle:
+UPDATE umbral_state
+SET current_phase = 'IDLE',
+    active_target_app = NULL,
+    phase_start_timestamp = NULL,
+    unlock_time_epoch = NULL,
+    emergency_bypass_available = 1,
+    updated_at = :updatedAt
+WHERE id = 1;

@@ -1,0 +1,57 @@
+CREATE TABLE content_cards (
+    id                     TEXT    NOT NULL PRIMARY KEY,
+    category               TEXT    NOT NULL,
+    title                  TEXT    NOT NULL,
+    body                   TEXT    NOT NULL,
+    source                 TEXT,
+    theological_depth_tier INTEGER NOT NULL DEFAULT 1,
+    liturgical_theme       TEXT,
+    emotional_state        TEXT,
+    display_count          INTEGER NOT NULL DEFAULT 0,
+    last_shown_at          INTEGER,
+    user_rating            INTEGER,
+    created_at             INTEGER NOT NULL
+);
+
+CREATE INDEX idx_cc_depth      ON content_cards(theological_depth_tier);
+CREATE INDEX idx_cc_last_shown ON content_cards(last_shown_at);
+CREATE INDEX idx_cc_displays   ON content_cards(display_count);
+
+getRankedCard:
+SELECT * FROM content_cards
+WHERE theological_depth_tier = :depthTier
+ORDER BY COALESCE(last_shown_at, 0) ASC, display_count ASC
+LIMIT 1;
+
+getAnyRankedCard:
+SELECT * FROM content_cards
+ORDER BY COALESCE(last_shown_at, 0) ASC, display_count ASC
+LIMIT 1;
+
+getCardById:
+SELECT * FROM content_cards WHERE id = :id;
+
+countCards:
+SELECT COUNT(*) FROM content_cards;
+
+countCardsByTier:
+SELECT COUNT(*) FROM content_cards WHERE theological_depth_tier = :depthTier;
+
+updateDisplayStats:
+UPDATE content_cards
+SET display_count = display_count + 1, last_shown_at = :timestamp
+WHERE id = :id;
+
+updateUserRating:
+UPDATE content_cards SET user_rating = :rating WHERE id = :id;
+
+insertCard:
+INSERT OR REPLACE INTO content_cards (
+    id, category, title, body, source,
+    theological_depth_tier, liturgical_theme, emotional_state,
+    display_count, last_shown_at, user_rating, created_at
+) VALUES (
+    :id, :category, :title, :body, :source,
+    :theologicalDepthTier, :liturgicalTheme, :emotionalState,
+    :displayCount, :lastShownAt, :userRating, :createdAt
+);

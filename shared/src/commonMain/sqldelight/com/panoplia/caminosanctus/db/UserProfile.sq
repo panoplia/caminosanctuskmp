@@ -1,0 +1,59 @@
+CREATE TABLE user_profile (
+    id                         INTEGER NOT NULL PRIMARY KEY DEFAULT 1,
+    streak                     INTEGER NOT NULL DEFAULT 0,
+    longest_streak             INTEGER NOT NULL DEFAULT 0,
+    total_intercepts           INTEGER NOT NULL DEFAULT 0,
+    preferred_interaction_mode TEXT    NOT NULL DEFAULT 'BREATHING',
+    custom_phrase              TEXT,
+    lock_duration_minutes      INTEGER NOT NULL DEFAULT 15,
+    subscription_status        TEXT    NOT NULL DEFAULT 'FREE',
+    subscription_expires_at    INTEGER,
+    install_timestamp          INTEGER NOT NULL,
+    last_active_date           INTEGER NOT NULL,
+    paywall_shown_count        INTEGER NOT NULL DEFAULT 0,
+    paywall_last_shown_at      INTEGER,
+    review_prompt_shown        INTEGER NOT NULL DEFAULT 0,
+    onboarding_complete        INTEGER NOT NULL DEFAULT 0
+);
+
+initProfile:
+INSERT OR IGNORE INTO user_profile (id, install_timestamp, last_active_date)
+VALUES (1, :installTimestamp, :lastActiveDate);
+
+getProfile:
+SELECT * FROM user_profile WHERE id = 1;
+
+updateStreak:
+UPDATE user_profile
+SET streak = :streak, longest_streak = MAX(longest_streak, :streak)
+WHERE id = 1;
+
+updateSubscription:
+UPDATE user_profile
+SET subscription_status = :status, subscription_expires_at = :expiresAt
+WHERE id = 1;
+
+updateInteractionMode:
+UPDATE user_profile
+SET preferred_interaction_mode = :mode, custom_phrase = :customPhrase
+WHERE id = 1;
+
+updateLockDuration:
+UPDATE user_profile SET lock_duration_minutes = :minutes WHERE id = 1;
+
+incrementPaywallShown:
+UPDATE user_profile
+SET paywall_shown_count = paywall_shown_count + 1, paywall_last_shown_at = :timestamp
+WHERE id = 1;
+
+markReviewPromptShown:
+UPDATE user_profile SET review_prompt_shown = 1 WHERE id = 1;
+
+updateLastActive:
+UPDATE user_profile SET last_active_date = :dateEpoch WHERE id = 1;
+
+incrementTotalIntercepts:
+UPDATE user_profile SET total_intercepts = total_intercepts + 1 WHERE id = 1;
+
+completeOnboarding:
+UPDATE user_profile SET onboarding_complete = 1 WHERE id = 1;

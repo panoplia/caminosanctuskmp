@@ -1,0 +1,11 @@
+.gradle/
+build/
+*.iml
+local.properties
+.idea/
+*.keystore
+*.jks
+DerivedData/
+Pods/
+*.xcworkspace/xcuserdata/
+.DS_Store
