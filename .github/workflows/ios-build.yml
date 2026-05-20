@@ -28,24 +28,26 @@ jobs:
       - name: Build KMP XCFramework
         run: ./gradlew :shared:assembleSharedXCFramework
 
-      - name: Build main app target
-        run: |
-          xcodebuild \
-            -workspace iosApp/CaminoSanctus.xcworkspace \
-            -scheme CaminoSanctus \
-            -destination "generic/platform=iOS Simulator" \
-            -derivedDataPath DerivedData \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            build
+# PHASE 3: Uncomment when iosApp/CaminoSanctus.xcworkspace exists
+#      - name: Build main app target
+#        run: |
+#          xcodebuild \
+#            -workspace iosApp/CaminoSanctus.xcworkspace \
+#            -scheme CaminoSanctus \
+#            -destination "generic/platform=iOS Simulator" \
+#            -derivedDataPath DerivedData \
+#            CODE_SIGN_IDENTITY="" \
+#            CODE_SIGNING_REQUIRED=NO \
+#            build
 
-      - name: Build DeviceActivity extension target
-        run: |
-          xcodebuild \
-            -workspace iosApp/CaminoSanctus.xcworkspace \
-            -scheme CaminoActivityMonitor \
-            -destination "generic/platform=iOS Simulator" \
-            -derivedDataPath DerivedData \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            build
+# PHASE 3: Uncomment when iosApp/CaminoSanctus.xcworkspace exists
+#      - name: Build DeviceActivity extension target
+#        run: |
+#          xcodebuild \
+#            -workspace iosApp/CaminoSanctus.xcworkspace \
+#            -scheme CaminoActivityMonitor \
+#            -destination "generic/platform=iOS Simulator" \
+#            -derivedDataPath DerivedData \
+#            CODE_SIGN_IDENTITY="" \
+#            CODE_SIGNING_REQUIRED=NO \
+#            build
